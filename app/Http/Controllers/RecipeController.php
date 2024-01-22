@@ -5,7 +5,8 @@ use Illuminate\Http\Response; // Import the Response class
 
 use App\Models\Recipe;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 class RecipeController extends Controller
 {
     /**
@@ -40,8 +41,7 @@ class RecipeController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'preparation_time' => 'required|integer|min:1',
@@ -60,25 +60,26 @@ class RecipeController extends Controller
             'sugars' => 'nullable|string',
             'protein' => 'nullable|string',
             'categoryId' => 'required|exists:categories,id',
-            'userId' => 'required|exists:users,id',
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
     
-        // Handle image upload
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('recipe_images', 'public');
-        } else {
-            $imagePath = null;
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
         }
     
-        // Create a new recipe
+        // Handle image upload
+        $imagePath = $request->hasFile('image') ? $request->file('image')->store('recipe_images', 'public') : null;
+    
+        // Create a new recipe with the authenticated user's ID
         $recipe = new Recipe([
             'name' => $request->input('name'),
             'description' => $request->input('description'),
             'preparation_time' => $request->input('preparation_time'),
             'serving' => $request->input('serving'),
-            'ingredients' => $request->input('ingredients'),
-            'instructions' => $request->input('instructions'),
+            'ingredients' => json_encode($request->input('ingredients')),
+            'instructions' =>json_encode($request->input('instructions')),
             'calories' => $request->input('calories'),
             'total_fat' => $request->input('total_fat'),
             'saturated_fat' => $request->input('saturated_fat'),
@@ -89,16 +90,18 @@ class RecipeController extends Controller
             'sugars' => $request->input('sugars'),
             'protein' => $request->input('protein'),
             'categoryId' => $request->input('categoryId'),
-            'userId' => $request->input('userId'),
+            'userId' => auth()->id(), // Set the user ID to the authenticated user's ID
             'image' => $imagePath,
         ]);
     
         // Save the recipe to the database
+        // dd($recipe);
         $recipe->save();
     
         // Redirect or return a response
         return redirect()->route('recipes.index')->with('success', 'Recipe created successfully');
     }
+    
     
     /**
      * Display the specified resource.

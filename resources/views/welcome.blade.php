@@ -82,17 +82,19 @@
     <section class="tstbite-components my-4 my-md-5">
         <h5 class="py-3 mb-0">Popular Categories</h5>
         <div class="row">
+            @foreach ($limitCategories as $category)
             <div class="col-lg-2 col-md-4 col-4">
                 <figure class="my-3 text-center tstbite-card">
-                    <a href="category.html" class="tstbite-animation stretched-link rounded-circle">
-                        <img src="assets/images/menus/menu8.png" class="rounded-circle" alt="Menu">
+                    <a href="{{ route('categories.show', $category->id) }}" class="tstbite-animation stretched-link rounded-circle">
+                        <img src="{{ asset('assets/images/menus/' . $category->image) }}"  class="rounded-circle" alt="{{ $category->name }}">
                     </a>
                     <figcaption class="mt-2">
-                        <a href="category.html" class="tstbite-category-title">Pasta</a>
+                        <a href="{{ route('categories.show', $category->id) }}" class="tstbite-category-title">{{ $category->name }}</a>
                     </figcaption>
                 </figure>
             </div>
-            <div class="col-lg-2 col-md-4 col-4">
+        @endforeach
+            {{-- <div class="col-lg-2 col-md-4 col-4">
                 <figure class="my-3 text-center tstbite-card">
                     <a href="category.html" class="tstbite-animation stretched-link rounded-circle">
                         <img src="assets/images/menus/menu9.png" class="rounded-circle" alt="Menu">
@@ -141,7 +143,7 @@
                         <a href="category.html" class="tstbite-category-title">Breakfast</a>
                     </figcaption>
                 </figure>
-            </div>
+            </div> --}}
         </div>
     </section>
 

@@ -9,7 +9,24 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Create Recipe</h6>
+            
         </div>
+        @if($errors->has('error'))
+    <div class="alert alert-danger">
+        {{ $errors->first('error') }}
+    </div>
+@endif
+<!-- Display errors -->
+@if($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
         <div class="card-body">
             <form action="{{ route('recipes.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -19,7 +36,7 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label for="category">Category:</label>
-                            <select class="form-control" id="category" name="category_id" required>
+                            <select class="form-control" id="category" name="categoryId" required>
                                 <option value="" selected disabled>Select a category</option>
                                 @foreach (App\Models\Category::all() as $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -82,7 +99,7 @@
                     </div>
 
                     <!-- Instructions -->
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
 
                         <div class="form-group" id="instructions">
                             <label>Instructions:</label>

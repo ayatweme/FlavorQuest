@@ -46,16 +46,41 @@
                                     d="M24.39,26.276l-4.9-4.9a12.012,12.012,0,1,1,1.885-1.885l4.9,4.9a1.334,1.334,0,0,1-1.886,1.886ZM2.666,12a9.329,9.329,0,0,0,15.827,6.7,1.338,1.338,0,0,1,.206-.206A9.332,9.332,0,1,0,2.666,12Z" />
                             </svg>
                         </a>
-                        {{-- <a href="{{route('login')}}" class="btn btn-sm btn-outline-dark ml-0 ml-md-4">Login</a> --}}
+                        {{-- <a href="{{route('login')}}" class="btn btn-sm btn-outline-dark ml-0 ml-md-4">Login</a>
+                        --}}
                         {{-- <a href="javascript:void(0);" data-toggle="modal" data-target="#exampleModalCenter"
                             class="btn btn-sm btn-outline-dark ml-0 ml-md-4">Login</a> --}}
+                        {{-- <a href="javascript:void(0);" data-toggle="modal" data-target="#loginModal"
+                            class="btn btn-sm btn-outline-dark ml-0 ml-md-4">Login</a> --}}
+                        @auth
+                        <a class="ml-4 ml-md-4 mr-2 mr-md-0 circle dropdown-toggle" id="avatarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="assets/images/avatars/avatar1.png" alt="Avatar">
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="avatarDropdown">
+                            <!-- Add your dropdown menu items here -->
+                            <a class="dropdown-item" href="{{ route('recipes.index') }}">Recipe Dashboard</a>
+
+                            <a class="dropdown-item" href="#">Profile</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                        </div>
+                        @else
                         <a href="javascript:void(0);" data-toggle="modal" data-target="#loginModal"
                             class="btn btn-sm btn-outline-dark ml-0 ml-md-4">Login</a>
+                        @endauth
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        @csrf
+    </form>
     <!-- Modal Login -->
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -132,42 +157,44 @@
             </div>
         </div>
     </div>
-<!-- Your modal content -->
-<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="loginModalLabel">Login</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                {{-- <iframe src="{{ route('login') }}" width="100%" height="400px" frameborder="0"></iframe> --}}
-                @include('auth.login')
-                {{-- @include('auth.register') --}}
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Your modal content -->
-<div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="loginModalLabel">Sign Up</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                {{-- <iframe src="{{ route('login') }}" width="100%" height="400px" frameborder="0"></iframe> --}}
-                @include('auth.register')
-                {{-- @include('auth.register') --}}
+    <!-- Your modal content -->
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Login</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{-- <iframe src="{{ route('login') }}" width="100%" height="400px" frameborder="0"></iframe> --}}
+                    @include('auth.login')
+                    {{-- @include('auth.register') --}}
+                </div>
             </div>
         </div>
     </div>
-</div>
+    <!-- Your modal content -->
+    <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Sign Up</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{-- <iframe src="{{ route('login') }}" width="100%" height="400px" frameborder="0"></iframe> --}}
+                    @include('auth.register')
+                    {{-- @include('auth.register') --}}
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="container">
         <div class="d-flex align-items-center py-1 py-md-4">
@@ -213,6 +240,6 @@
                 </ul>
             </div>
         </nav>
-        
+
     </div>
 </header>
