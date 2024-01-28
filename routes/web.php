@@ -7,6 +7,13 @@ use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\CategoryController;
 
 use App\Http\Controllers\WebsiteController;
+use App\Http\Controllers\PricingController;
+// web.php or routes/web.php
+
+use App\Http\Controllers\SubscriptionController;
+
+Route::post('/subscribe/{plan}', [SubscriptionController::class, 'subscribe'])->name('subscribe');
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,10 +24,17 @@ use App\Http\Controllers\WebsiteController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// routes/web.php
+
+use App\Http\Controllers\CommentController;
+
+Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
+
 
 
 Route::get('/', [WebsiteController::class, 'index'])->name('welcome');
-
+Route::get('/category', [WebsiteController::class, 'category'])->name('category');
+Route::get('/fullRecipes/{id}', [WebsiteController::class, 'showFullRecipe'])->name('fullRecipes');
 Route::resource('categories', CategoryController::class);
 
 // Route::get('/', function () {
@@ -29,6 +43,14 @@ Route::resource('categories', CategoryController::class);
 Route::get('/about', function () {
     return view('about');
 })->name('about');
+// Route::get('/fullRecipes', function () {
+//     return view('fullRecipes');
+// })->name('fullRecipes');
+
+// Route::get('/all-category', function () {
+//     return view('all-category');
+// })->name('all-category');
+
 Route::get('/admin', [AdminController::class, 'index'])->name('index');
 Route::get('/admin', [RecipeController::class, 'index'])->name('index');
 // routes/web.php
@@ -41,6 +63,7 @@ Route::get('/recipes/create', [RecipeController::class, 'create'])->name('recipe
 Route::resource('/recipes',  RecipeController::class);
 // routes/web.php
 
+Route::get('/pricing', [PricingController::class, 'index'])->name('pricing.index');
 
 // Example route definition for registration page
 Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
@@ -48,5 +71,8 @@ Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('r
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+// web.php or routes/web.php
+
+
 
 require __DIR__.'/auth.php';

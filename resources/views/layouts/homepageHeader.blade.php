@@ -55,7 +55,7 @@
                         @auth
                         <a class="ml-4 ml-md-4 mr-2 mr-md-0 circle dropdown-toggle" id="avatarDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="assets/images/avatars/avatar1.png" alt="Avatar">
+                            <img src="assets/images/avatars/user.png" alt="Avatar">
                         </a>
 
                         <div class="dropdown-menu" aria-labelledby="avatarDropdown">
@@ -228,10 +228,10 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('about') }}">About</a>
                     </li>
-                    {{-- <li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('category') }}">Category</a>
                     </li>
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link" href="{{ route('favorites') }}">Favorites</a>
                     </li>
                     <li class="nav-item">

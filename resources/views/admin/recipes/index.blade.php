@@ -30,10 +30,10 @@
                                 <td>{{ $recipe->description }}</td>
                                 <td>{{ $recipe->preparation_time }}</td>
                                 <td>
-                                    <button type="button" id="{{ $recipe->id }}" table="recipes" data-toggle="modal"
+                                    {{-- <button type="button" id="{{ $recipe->id }}" table="recipes" data-toggle="modal"
                                         data-target="#recipeModal" class="btn btn-icon btn-success update_edit-click">
                                         <i class="fas fa-edit"></i>
-                                    </button>
+                                    </button> --}}
                                     <button data-toggle="modal" data-target="#modal-delete-record" type="button"
                                         id="{{ $recipe->id }}" table="recipes"
                                         class="del_click remove_record delete-privilege btn btn-icon btn-danger">

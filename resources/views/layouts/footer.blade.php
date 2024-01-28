@@ -4,10 +4,9 @@
         <div class="col-md-6">
           <div class="tastebite-footer-contnet pr-0 pr-lg-5 mr-0 mr-md-5">
             <a href="index.html">
-              <img src="assets/images/brands/flavorquest-logo-transparent.svg" width="255" alt="FlavorQuest">
+              <img src="{{ asset('assets/images/brands/flavorquest-logo-transparent.svg') }}" width="255" alt="FlavorQuest">
             </a>
-            <p class="mt-3 text-gray-300 pr-0 pr-lg-5 mr-0 mr-lg-4">"On the other hand, we denounce with righteous
-              indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment
+            <p class="mt-3 text-gray-300 pr-0 pr-lg-5 mr-0 mr-lg-4">" Redefining the culinary experience with a focus on community, exclusive content, and user-friendly design. Stay tuned for exciting features! Your go-to platform for food inspiration and connections."
             </p>
           </div>
         </div>

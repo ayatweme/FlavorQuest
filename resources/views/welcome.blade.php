@@ -78,6 +78,21 @@
 </section>
 
 <div class="container">
+    {{-- @if($errors->has('error'))
+    <div class="alert alert-danger">
+        {{ $errors->first('error') }}
+    </div>
+@endif
+<!-- Display errors -->
+@if($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif --}}
     <!-- Tstbite Components, My 4, My Md 5 -->
     <section class="tstbite-components my-4 my-md-5">
         <h5 class="py-3 mb-0">Popular Categories</h5>
@@ -94,56 +109,7 @@
                 </figure>
             </div>
         @endforeach
-            {{-- <div class="col-lg-2 col-md-4 col-4">
-                <figure class="my-3 text-center tstbite-card">
-                    <a href="category.html" class="tstbite-animation stretched-link rounded-circle">
-                        <img src="assets/images/menus/menu9.png" class="rounded-circle" alt="Menu">
-                    </a>
-                    <figcaption class="mt-2">
-                        <a href="category.html" class="tstbite-category-title">Pizza</a>
-                    </figcaption>
-                </figure>
-            </div>
-            <div class="col-lg-2 col-md-4 col-4">
-                <figure class="my-3 text-center tstbite-card">
-                    <a href="category.html" class="tstbite-animation stretched-link rounded-circle">
-                        <img src="assets/images/menus/menu10.png" class="rounded-circle" alt="Menu">
-                    </a>
-                    <figcaption class="mt-2">
-                        <a href="category.html" class="tstbite-category-title">Vegan</a>
-                    </figcaption>
-                </figure>
-            </div>
-            <div class="col-lg-2 col-md-4 col-4">
-                <figure class="my-3 text-center tstbite-card">
-                    <a href="category.html" class="tstbite-animation stretched-link rounded-circle">
-                        <img src="assets/images/menus/menu11.png" class="rounded-circle" alt="Menu">
-                    </a>
-                    <figcaption class="mt-2">
-                        <a href="category.html" class="tstbite-category-title">Desserts</a>
-                    </figcaption>
-                </figure>
-            </div>
-            <div class="col-lg-2 col-md-4 col-4">
-                <figure class="my-3 text-center tstbite-card">
-                    <a href="category.html" class="tstbite-animation stretched-link rounded-circle">
-                        <img src="assets/images/menus/menu12.png" class="rounded-circle" alt="Menu">
-                    </a>
-                    <figcaption class="mt-2">
-                        <a href="category.html" class="tstbite-category-title">Smoothies</a>
-                    </figcaption>
-                </figure>
-            </div>
-            <div class="col-lg-2 col-md-4 col-4">
-                <figure class="my-3 text-center tstbite-card">
-                    <a href="category.html" class="tstbite-animation stretched-link rounded-circle">
-                        <img src="assets/images/menus/menu13.png" class="rounded-circle" alt="Menu">
-                    </a>
-                    <figcaption class="mt-2">
-                        <a href="category.html" class="tstbite-category-title">Breakfast</a>
-                    </figcaption>
-                </figure>
-            </div> --}}
+           
         </div>
     </section>
 
@@ -151,276 +117,59 @@
     <section class="tstbite-components my-4">
         <h6 class="my-3">Super Delicious</h6>
         <div class="row">
+            @foreach ($limitRecipes as $recipes)
+
             <div class="col-xl-4 col-md-6">
                 <figure class="my-3 tstbite-card">
-                    <a href="#0" class="tstbite-animation rounded-top-6">
-                        <img src="assets/images/menus/menu84.jpg" class="w-100" alt="Menu">
+                    <a href="{{ route('fullRecipes', $recipes->id) }}"  class="tstbite-animation rounded-top-6">
+                        <img src="{{ asset('storage/'.$recipes->image) }}"
+                        class="w-100" alt="{{ $recipes->name }}">
                     </a>
                     <figcaption class="tstbite-delicious border-top-0 rounded-bottom-6">
                         <div class="text-black pt-3 pb-4 px-4">
                             <div class="w-100 float-left">
                                 <div class="float-left">
                                     <div class="fabrx-ratings has-rating rating">
-                                        <input type="radio" id="radio1" name="rate1" value="1" checked="checked">
-                                        <label for="radio1" class="custom-starboxes"></label>
-                                        <input type="radio" id="radio2" name="rate1" value="2">
-                                        <label for="radio2" class="custom-starboxes"></label>
-                                        <input type="radio" id="radio3" name="rate1" value="3">
-                                        <label for="radio3" class="custom-starboxes"></label>
-                                        <input type="radio" id="radio4" name="rate1" value="4">
-                                        <label for="radio4" class="custom-starboxes"></label>
-                                        <input type="radio" id="radio5" name="rate1" value="5">
-                                        <label for="radio5" class="custom-starboxes"></label>
+                                        <input type="radio" id="radio1-{{ $recipes->name }}" name="rate1" value="1" checked="checked">
+                                        <label for="radio1-{{ $recipes->name }}" class="custom-starboxes"></label>
+                                        <input type="radio" id="radio2-{{ $recipes->name }}" name="rate1" value="2">
+                                        <label for="radio2-{{ $recipes->name }}" class="custom-starboxes"></label>
+                                        <input type="radio" id="radio3-{{ $recipes->name }}" name="rate1" value="3">
+                                        <label for="radio3-{{ $recipes->name }}" class="custom-starboxes"></label>
+                                        <input type="radio" id="radio4-{{ $recipes->name }}" name="rate1" value="4">
+                                        <label for="radio4-{{ $recipes->name }}" class="custom-starboxes"></label>
+                                        <input type="radio" id="radio5-{{ $recipes->name }}" name="rate1" value="5">
+                                        <label for="radio5-{{ $recipes->name }}" class="custom-starboxes"></label>
                                     </div>
                                 </div>
                             </div>
                             <div class="clearfix"></div>
-                            <h6 class="inter-font f-size-20 mb-0 font-weight-semibold"><a href="#0"
-                                    class="text-black">Delicious
-                                    Fancy Glazed Blueberry Donuts</a></h6>
+                            <h6 class="inter-font f-size-20 mb-0 font-weight-semibold">
+                                <a href="{{ route('fullRecipes', $recipes->id) }}" class="text-black">
+                                    {{ $recipes->name }}
+                                </a>
+                            </h6>
+                            
+                            
                             <div class="mt-3">
                                 <img src="assets/images/avatars/avatar1.png" class="rounded-circle" alt="Avatar">
-                                <small class="pl-1">Tricia Albert</small>
+                                <small class="pl-1">{{ $recipes->user->name }}</small>
                             </div>
                             <div class="d-flex flex-wrap justify-content-end mt-4">
                                 <div class="text-gray-300">
                                     <img src="assets/images/icons/calendar.svg" alt="Icon">
-                                    <small>Yesterday</small>
+                                    <small>{{ \Carbon\Carbon::parse($recipes->created_at)->format('Y-m-d') }}</small>
                                 </div>
                                 <div class="ml-4 text-gray-300">
                                     <img src="assets/images/icons/chat.svg" alt="Icon">
-                                    <small>456</small>
+                                    <small>{{ $recipes->comments()->count() }}</small>
                                 </div>
                             </div>
                         </div>
                     </figcaption>
                 </figure>
             </div>
-            <div class="col-xl-4 col-md-6">
-                <figure class="my-3 tstbite-card">
-                    <a href="#0" class="tstbite-animation rounded-top-6">
-                        <img src="assets/images/menus/menu85.jpg" class="w-100" alt="Menu">
-                    </a>
-                    <figcaption class="tstbite-delicious border-top-0 rounded-bottom-6">
-                        <div class="text-black pt-3 pb-4 px-4">
-                            <div class="w-100 float-left">
-                                <div class="float-left">
-                                    <div class="fabrx-ratings has-rating rating">
-                                        <input type="radio" id="radio6" name="rate2" value="1" checked="checked">
-                                        <label for="radio6" class="custom-starboxes"></label>
-                                        <input type="radio" id="radio7" name="rate2" value="2">
-                                        <label for="radio7" class="custom-starboxes"></label>
-                                        <input type="radio" id="radio8" name="rate2" value="3">
-                                        <label for="radio8" class="custom-starboxes"></label>
-                                        <input type="radio" id="radio9" name="rate2" value="4">
-                                        <label for="radio9" class="custom-starboxes"></label>
-                                        <input type="radio" id="radio10" name="rate2" value="5">
-                                        <label for="radio10" class="custom-starboxes"></label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-                            <h6 class="inter-font f-size-20 mb-0 font-weight-semibold"><a href="#0"
-                                    class="text-black">Pan Fried
-                                    Cod in Creamy Kale Sauce</a></h6>
-                            <div class="mt-3">
-                                <img src="assets/images/avatars/avatar1.png" class="rounded-circle" alt="Avatar">
-                                <small class="pl-1">Tricia Albert</small>
-                            </div>
-                            <div class="d-flex flex-wrap justify-content-end mt-4">
-                                <div class="text-gray-300">
-                                    <img src="assets/images/icons/calendar.svg" alt="Icon">
-                                    <small>Yesterday</small>
-                                </div>
-                                <div class="ml-4 text-gray-300">
-                                    <img src="assets/images/icons/chat.svg" alt="Icon">
-                                    <small>456</small>
-                                </div>
-                            </div>
-                        </div>
-                    </figcaption>
-                </figure>
-            </div>
-            <div class="col-xl-4 col-md-6">
-                <figure class="my-3 tstbite-card">
-                    <a href="#0" class="tstbite-animation rounded-top-6">
-                        <img src="assets/images/menus/menu86.jpg" class="w-100" alt="Menu">
-                    </a>
-                    <figcaption class="tstbite-delicious border-top-0 rounded-bottom-6">
-                        <div class="text-black pt-3 pb-4 px-4">
-                            <div class="w-100 float-left">
-                                <div class="float-left">
-                                    <div class="fabrx-ratings has-rating rating">
-                                        <input type="radio" id="radio11" name="rate3" value="1" checked="checked">
-                                        <label for="radio11" class="custom-starboxes"></label>
-                                        <input type="radio" id="radio12" name="rate3" value="2">
-                                        <label for="radio12" class="custom-starboxes"></label>
-                                        <input type="radio" id="radio13" name="rate3" value="3">
-                                        <label for="radio13" class="custom-starboxes"></label>
-                                        <input type="radio" id="radio14" name="rate3" value="4">
-                                        <label for="radio14" class="custom-starboxes"></label>
-                                        <input type="radio" id="radio15" name="rate3" value="5">
-                                        <label for="radio15" class="custom-starboxes"></label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-                            <h6 class="inter-font f-size-20 mb-0 font-weight-semibold"><a href="#0"
-                                    class="text-black">Berry
-                                    Maddness Biscuts</a></h6>
-                            <div class="mt-3">
-                                <img src="assets/images/avatars/avatar1.png" class="rounded-circle" alt="Avatar">
-                                <small class="pl-1">Tricia Albert</small>
-                            </div>
-                            <div class="d-flex flex-wrap justify-content-end mt-4">
-                                <div class="text-gray-300">
-                                    <img src="assets/images/icons/calendar.svg" alt="Icon">
-                                    <small>Yesterday</small>
-                                </div>
-                                <div class="ml-4 text-gray-300">
-                                    <img src="assets/images/icons/chat.svg" alt="Icon">
-                                    <small>456</small>
-                                </div>
-                            </div>
-                        </div>
-                    </figcaption>
-                </figure>
-            </div>
-            <div class="col-xl-4 col-md-6">
-                <figure class="my-3 tstbite-card">
-                    <a href="#0" class="tstbite-animation rounded-top-6">
-                        <img src="assets/images/menus/menu87.jpg" class="w-100" alt="Menu">
-                    </a>
-                    <figcaption class="tstbite-delicious border-top-0 rounded-bottom-6">
-                        <div class="text-black pt-3 pb-4 px-4">
-                            <div class="w-100 float-left">
-                                <div class="float-left">
-                                    <div class="fabrx-ratings has-rating rating">
-                                        <input type="radio" id="radio16" name="rate4" value="1" checked="checked">
-                                        <label for="radio16" class="custom-starboxes"></label>
-                                        <input type="radio" id="radio17" name="rate4" value="2">
-                                        <label for="radio17" class="custom-starboxes"></label>
-                                        <input type="radio" id="radio18" name="rate4" value="3">
-                                        <label for="radio18" class="custom-starboxes"></label>
-                                        <input type="radio" id="radio19" name="rate4" value="4">
-                                        <label for="radio19" class="custom-starboxes"></label>
-                                        <input type="radio" id="radio20" name="rate4" value="5">
-                                        <label for="radio20" class="custom-starboxes"></label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-                            <h6 class="inter-font f-size-20 mb-0 font-weight-semibold"><a href="#0"
-                                    class="text-black">Four
-                                    Ingredient Oatmeal Pancakes</a></h6>
-                            <div class="mt-3">
-                                <img src="assets/images/avatars/avatar1.png" class="rounded-circle" alt="Avatar">
-                                <small class="pl-1">Tricia Albert</small>
-                            </div>
-                            <div class="d-flex flex-wrap justify-content-end mt-4">
-                                <div class="text-gray-300">
-                                    <img src="assets/images/icons/calendar.svg" alt="Icon">
-                                    <small>Yesterday</small>
-                                </div>
-                                <div class="ml-4 text-gray-300">
-                                    <img src="assets/images/icons/chat.svg" alt="Icon">
-                                    <small>456</small>
-                                </div>
-                            </div>
-                        </div>
-                    </figcaption>
-                </figure>
-            </div>
-            <div class="col-xl-4 col-md-6">
-                <figure class="my-3 tstbite-card">
-                    <a href="#0" class="tstbite-animation rounded-top-6">
-                        <img src="assets/images/menus/menu88.jpg" class="w-100" alt="Menu">
-                    </a>
-                    <figcaption class="tstbite-delicious border-top-0 rounded-bottom-6">
-                        <div class="text-black pt-3 pb-4 px-4">
-                            <div class="w-100 float-left">
-                                <div class="float-left">
-                                    <div class="fabrx-ratings has-rating rating">
-                                        <input type="radio" id="radio21" name="rate5" value="1" checked="checked">
-                                        <label for="radio21" class="custom-starboxes"></label>
-                                        <input type="radio" id="radio22" name="rate5" value="2">
-                                        <label for="radio22" class="custom-starboxes"></label>
-                                        <input type="radio" id="radio23" name="rate5" value="3">
-                                        <label for="radio23" class="custom-starboxes"></label>
-                                        <input type="radio" id="radio24" name="rate5" value="4">
-                                        <label for="radio24" class="custom-starboxes"></label>
-                                        <input type="radio" id="radio25" name="rate5" value="5">
-                                        <label for="radio25" class="custom-starboxes"></label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-                            <h6 class="inter-font f-size-20 mb-0 font-weight-semibold"><a href="#0"
-                                    class="text-black">Pumpkin
-                                    Marshmallow Pie</a></h6>
-                            <div class="mt-3">
-                                <img src="assets/images/avatars/avatar1.png" class="rounded-circle" alt="Avatar">
-                                <small class="pl-1">Tricia Albert</small>
-                            </div>
-                            <div class="d-flex flex-wrap justify-content-end mt-4">
-                                <div class="text-gray-300">
-                                    <img src="assets/images/icons/calendar.svg" alt="Icon">
-                                    <small>Yesterday</small>
-                                </div>
-                                <div class="ml-4 text-gray-300">
-                                    <img src="assets/images/icons/chat.svg" alt="Icon">
-                                    <small>456</small>
-                                </div>
-                            </div>
-                        </div>
-                    </figcaption>
-                </figure>
-            </div>
-            <div class="col-xl-4 col-md-6">
-                <figure class="my-3 tstbite-card">
-                    <a href="#0" class="tstbite-animation rounded-top-6">
-                        <img src="assets/images/menus/menu89.jpg" class="w-100" alt="Menu">
-                    </a>
-                    <figcaption class="tstbite-delicious border-top-0 rounded-bottom-6">
-                        <div class="text-black pt-3 pb-4 px-4">
-                            <div class="w-100 float-left">
-                                <div class="float-left">
-                                    <div class="fabrx-ratings has-rating rating">
-                                        <input type="radio" id="radio26" name="rate6" value="1" checked="checked">
-                                        <label for="radio26" class="custom-starboxes"></label>
-                                        <input type="radio" id="radio27" name="rate6" value="2">
-                                        <label for="radio27" class="custom-starboxes"></label>
-                                        <input type="radio" id="radio28" name="rate6" value="3">
-                                        <label for="radio28" class="custom-starboxes"></label>
-                                        <input type="radio" id="radio29" name="rate6" value="4">
-                                        <label for="radio29" class="custom-starboxes"></label>
-                                        <input type="radio" id="radio30" name="rate6" value="5">
-                                        <label for="radio30" class="custom-starboxes"></label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-                            <h6 class="inter-font f-size-20 mb-0 font-weight-semibold"><a href="#0"
-                                    class="text-black">Mighty
-                                    Cheesy Breakfast Burger</a></h6>
-                            <div class="mt-3">
-                                <img src="assets/images/avatars/avatar1.png" class="rounded-circle" alt="Avatar">
-                                <small class="pl-1">Tricia Albert</small>
-                            </div>
-                            <div class="d-flex flex-wrap justify-content-end mt-4">
-                                <div class="text-gray-300">
-                                    <img src="assets/images/icons/calendar.svg" alt="Icon">
-                                    <small>Yesterday</small>
-                                </div>
-                                <div class="ml-4 text-gray-300">
-                                    <img src="assets/images/icons/chat.svg" alt="Icon">
-                                    <small>456</small>
-                                </div>
-                            </div>
-                        </div>
-                    </figcaption>
-                </figure>
-            </div>
+            @endforeach
         </div>
     </section>
     <!-- Tstbite Components, My 4, My Md 5 -->
@@ -517,296 +266,26 @@
     <section class="tstbite-components my-4 my-md-5">
         <h5 class="py-3 mb-0">Latest Recipes</h5>
         <div class="row">
+            @for ($i = 0; $i < 24; $i++)
             <div class="col-lg-3 col-md-4 col-6">
                 <figure class="my-3 my-md-4 tstbite-card">
-                    <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-                        <img src="assets/images/menus/menu20.jpg" class="w-100" alt="Menu">
+                    <a href="{{ route('fullRecipes', $latestRecipes[$i % count($latestRecipes)]->id) }}" class="tstbite-animation stretched-link rounded-6">
+                        <img src="{{ asset('storage/'. $latestRecipes[$i % count($latestRecipes)]->image )}}" class="w-100" alt="Menu">
                     </a>
                     <figcaption class="mt-2">
-                        <a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Caramel
-                            Strawberry Milkshake</a>
+                        <a href="{{ route('fullRecipes', $latestRecipes[$i % count($latestRecipes)]->id) }}" class="text-black d-block mt-1 font-weight-semibold big">
+                            {{ $latestRecipes[$i % count($latestRecipes)]->name }}
+                        </a>
                     </figcaption>
                 </figure>
             </div>
-            <div class="col-lg-3 col-md-4 col-6">
-                <figure class="my-3 my-md-4 tstbite-card">
-                    <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-                        <img src="assets/images/menus/menu21.jpg" class="w-100" alt="Menu">
-                    </a>
-                    <figcaption class="mt-2">
-                        <a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Cashew
-                            Vegan
-                            Rice</a>
-                    </figcaption>
-                </figure>
-            </div>
-            <div class="col-lg-3 col-md-4 col-6">
-                <figure class="my-3 my-md-4 tstbite-card">
-                    <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-                        <img src="assets/images/menus/menu22.jpg" class="w-100" alt="Menu">
-                    </a>
-                    <figcaption class="mt-2">
-                        <a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Smoked
-                            Salmon
-                            Salad Sandwich</a>
-                    </figcaption>
-                </figure>
-            </div>
-            <div class="col-lg-3 col-md-4 col-6">
-                <figure class="my-3 my-md-4 tstbite-card">
-                    <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-                        <img src="assets/images/menus/menu23.jpg" class="w-100" alt="Menu">
-                    </a>
-                    <figcaption class="mt-2">
-                        <a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Salmon in
-                            Creamy
-                            Sun Dried Tomato Sauce</a>
-                    </figcaption>
-                </figure>
-            </div>
-            <div class="col-lg-3 col-md-4 col-6">
-                <figure class="my-3 my-md-4 tstbite-card">
-                    <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-                        <img src="assets/images/menus/menu24.jpg" class="w-100" alt="Menu">
-                    </a>
-                    <figcaption class="mt-2">
-                        <a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Healthy
-                            Jam
-                            Waffle Breakfast</a>
-                    </figcaption>
-                </figure>
-            </div>
-            <div class="col-lg-3 col-md-4 col-6">
-                <figure class="my-3 my-md-4 tstbite-card">
-                    <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-                        <img src="assets/images/menus/menu25.jpg" class="w-100" alt="Menu">
-                    </a>
-                    <figcaption class="mt-2">
-                        <a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Chocolate
-                            and
-                            Banana Jar Cake</a>
-                    </figcaption>
-                </figure>
-            </div>
-            <div class="col-lg-3 col-md-4 col-6">
-                <figure class="my-3 my-md-4 tstbite-card">
-                    <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-                        <img src="assets/images/menus/menu26.jpg" class="w-100" alt="Menu">
-                    </a>
-                    <figcaption class="mt-2">
-                        <a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Caramel
-                            Blueberry
-                            Scones</a>
-                    </figcaption>
-                </figure>
-            </div>
-            <div class="col-lg-3 col-md-4 col-6">
-                <figure class="my-3 my-md-4 tstbite-card">
-                    <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-                        <img src="assets/images/menus/menu27.jpg" class="w-100" alt="Menu">
-                    </a>
-                    <figcaption class="mt-2">
-                        <a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Blueberry
-                            Carrot
-                            Cake</a>
-                    </figcaption>
-                </figure>
-            </div>
-            <div class="col-lg-3 col-md-4 col-6">
-                <figure class="my-3 my-md-4 tstbite-card">
-                    <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-                        <img src="assets/images/menus/menu28.jpg" class="w-100" alt="Menu">
-                    </a>
-                    <figcaption class="mt-2">
-                        <a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Vegan
-                            Cauliflower
-                            Salad</a>
-                    </figcaption>
-                </figure>
-            </div>
-            <div class="col-lg-3 col-md-4 col-6">
-                <figure class="my-3 my-md-4 tstbite-card">
-                    <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-                        <img src="assets/images/menus/menu29.jpg" class="w-100" alt="Menu">
-                    </a>
-                    <figcaption class="mt-2">
-                        <a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Roasted
-                            Red
-                            Pepper Soup</a>
-                    </figcaption>
-                </figure>
-            </div>
-            <div class="col-lg-3 col-md-4 col-6">
-                <figure class="my-3 my-md-4 tstbite-card">
-                    <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-                        <img src="assets/images/menus/menu30.jpg" class="w-100" alt="Menu">
-                    </a>
-                    <figcaption class="mt-2">
-                        <a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Eggs and
-                            Avocado
-                            Toast</a>
-                    </figcaption>
-                </figure>
-            </div>
-            <div class="col-lg-3 col-md-4 col-6">
-                <figure class="my-3 my-md-4 tstbite-card">
-                    <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-                        <img src="assets/images/menus/menu31.jpg" class="w-100" alt="Menu">
-                    </a>
-                    <figcaption class="mt-2">
-                        <a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Pork
-                            Shoulder
-                            Cashew Noodles</a>
-                    </figcaption>
-                </figure>
-            </div>
-            <div class="col-lg-3 col-md-4 col-6">
-                <figure class="my-3 my-md-4 tstbite-card">
-                    <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-                        <img src="assets/images/menus/menu32.jpg" class="w-100" alt="Menu">
-                    </a>
-                    <figcaption class="mt-2">
-                        <a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Toasted
-                            Farfalle
-                            In Pesto Sauce</a>
-                    </figcaption>
-                </figure>
-            </div>
-            <div class="col-lg-3 col-md-4 col-6">
-                <figure class="my-3 my-md-4 tstbite-card">
-                    <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-                        <img src="assets/images/menus/menu33.jpg" class="w-100" alt="Menu">
-                    </a>
-                    <figcaption class="mt-2">
-                        <a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Cheesy
-                            Bacon
-                            Burger Sliders</a>
-                    </figcaption>
-                </figure>
-            </div>
-            <div class="col-lg-3 col-md-4 col-6">
-                <figure class="my-3 my-md-4 tstbite-card">
-                    <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-                        <img src="assets/images/menus/menu34.jpg" class="w-100" alt="Menu">
-                    </a>
-                    <figcaption class="mt-2">
-                        <a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Fig and
-                            Raisins
-                            Oatmeal</a>
-                    </figcaption>
-                </figure>
-            </div>
-            <div class="col-lg-3 col-md-4 col-6">
-                <figure class="my-3 my-md-4 tstbite-card">
-                    <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-                        <img src="assets/images/menus/menu35.jpg" class="w-100" alt="Menu">
-                    </a>
-                    <figcaption class="mt-2">
-                        <a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Silky
-                            Smooth
-                            Panacotta</a>
-                    </figcaption>
-                </figure>
-            </div>
-            <div class="col-lg-3 col-md-4 col-6">
-                <figure class="my-3 my-md-4 tstbite-card">
-                    <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-                        <img src="assets/images/menus/menu36.jpg" class="w-100" alt="Menu">
-                    </a>
-                    <figcaption class="mt-2">
-                        <a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Triple
-                            Decker
-                            Cranberry Cake</a>
-                    </figcaption>
-                </figure>
-            </div>
-            <div class="col-lg-3 col-md-4 col-6">
-                <figure class="my-3 my-md-4 tstbite-card">
-                    <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-                        <img src="assets/images/menus/menu37.jpg" class="w-100" alt="Menu">
-                    </a>
-                    <figcaption class="mt-2">
-                        <a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Very
-                            Berry
-                            Healthy Summer Smoothie</a>
-                    </figcaption>
-                </figure>
-            </div>
-            <div class="col-lg-3 col-md-4 col-6">
-                <figure class="my-3 my-md-4 tstbite-card">
-                    <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-                        <img src="assets/images/menus/menu38.jpg" class="w-100" alt="Menu">
-                    </a>
-                    <figcaption class="mt-2">
-                        <a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Crispy
-                            Orange
-                            Chips</a>
-                    </figcaption>
-                </figure>
-            </div>
-            <div class="col-lg-3 col-md-4 col-6">
-                <figure class="my-3 my-md-4 tstbite-card">
-                    <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-                        <img src="assets/images/menus/menu39.jpg" class="w-100" alt="Menu">
-                    </a>
-                    <figcaption class="mt-2">
-                        <a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Tumeric
-                            Lavendar
-                            Tea</a>
-                    </figcaption>
-                </figure>
-            </div>
-            <div class="col-lg-3 col-md-4 col-6">
-                <figure class="my-3 my-md-4 tstbite-card">
-                    <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-                        <img src="assets/images/menus/menu40.jpg" class="w-100" alt="Menu">
-                    </a>
-                    <figcaption class="mt-2">
-                        <a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Blue
-                            Velvet
-                            Brownies</a>
-                    </figcaption>
-                </figure>
-            </div>
-            <div class="col-lg-3 col-md-4 col-6">
-                <figure class="my-3 my-md-4 tstbite-card">
-                    <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-                        <img src="assets/images/menus/menu41.jpg" class="w-100" alt="Menu">
-                    </a>
-                    <figcaption class="mt-2">
-                        <a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Birthday
-                            Cupcakes</a>
-                    </figcaption>
-                </figure>
-            </div>
-            <div class="col-lg-3 col-md-4 col-6">
-                <figure class="my-3 my-md-4 tstbite-card">
-                    <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-                        <img src="assets/images/menus/menu42.jpg" class="w-100" alt="Menu">
-                    </a>
-                    <figcaption class="mt-2">
-                        <a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Gourmet
-                            Fillet in
-                            Roasted Almond Sauce</a>
-                    </figcaption>
-                </figure>
-            </div>
-            <div class="col-lg-3 col-md-4 col-6">
-                <figure class="my-3 my-md-4 tstbite-card">
-                    <a href="recipe-sidebar.html" class="tstbite-animation stretched-link rounded-6">
-                        <img src="assets/images/menus/menu43.jpg" class="w-100" alt="Menu">
-                    </a>
-                    <figcaption class="mt-2">
-                        <a href="recipe-sidebar.html" class="text-black d-block mt-1 font-weight-semibold big">Four
-                            Ingredient
-                            Oatmeal Pancakes</a>
-                    </figcaption>
-                </figure>
-            </div>
+        @endfor
+        
+            
         </div>
-        <div class="text-center py-5">
+        {{-- <div class="text-center py-5">
             <a href="#0" class="btn btn-outline-dark px-5 py-2">Load More</a>
-        </div>
+        </div> --}}
     </section>
 </div>
 
