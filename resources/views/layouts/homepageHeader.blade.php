@@ -231,9 +231,10 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('category') }}">Category</a>
                     </li>
-                    {{-- <li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('favorites') }}">Favorites</a>
                     </li>
+                    {{--
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('contactUs') }}">Contact Us</a>
                     </li> --}}

@@ -43,6 +43,9 @@ Route::resource('categories', CategoryController::class);
 Route::get('/about', function () {
     return view('about');
 })->name('about');
+Route::get('/favorites', function () {
+    return view('favorites');
+})->name('favorites');
 // Route::get('/fullRecipes', function () {
 //     return view('fullRecipes');
 // })->name('fullRecipes');
